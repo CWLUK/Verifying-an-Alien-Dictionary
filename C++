@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        int mymap[26];
+        
+        for (int i=0; i<26; i++){
+            mymap[order[i] - 'a'] = i;
+        }
+        
+        for (string& w : words){
+            for (char& c : w){
+                c = mymap[c - 'a'];
+            }
+        }
+        
+        return is_sorted(words.begin(), words.end());
+/*
+        for (int i=0; i<words.size()-1; i++){
+            if (words[i] == words[i+1]) continue;
+            for (int j=0; j<words[i].length(); j++){                
+                if (j == words[i+1].length()) return false;
+                if (order.find(words[i][j]) > order.find(words[i+1][j])) return false;
+                if (order.find(words[i][j]) < order.find(words[i+1][j])) break;
+            }
+        }
+        return true;
+*/
+    }
+};
